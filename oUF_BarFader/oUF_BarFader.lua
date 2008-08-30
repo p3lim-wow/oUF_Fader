@@ -1,5 +1,6 @@
 local function UpdateElement(self, unit)
 	if(unit == 'player' and self.BarFade) then
+		local l, class = UnitClass('player')
 		local notFull = (UnitHealth('player') ~= UnitHealthMax('player')) or
 			(UnitPowerType('player') ~= 1 and UnitMana('player') ~= UnitManaMax('player')) or
 			(UnitPowerType('player') == 1 and UnitMana('player') > 0)
@@ -59,6 +60,10 @@ oUF:RegisterInitCallback(function(self)
 	event:RegisterEvent('UNIT_HAPPINESS')
 	event:RegisterEvent('UNIT_HEALTH')
 	event:RegisterEvent('UNIT_MANA')
+	event:RegisterEvent('UNIT_ENERGY')
+	event:RegisterEvent('UNIT_FOCUS')
+	event:RegisterEvent('UNIT_RAGE')
+	event:RegisterEvent('UNIT_RUNIC_POWER')
 	event:RegisterEvent('UNIT_TARGET')
 	event:RegisterEvent('UNIT_SPELLCAST_START')
 	event:RegisterEvent('UNIT_SPELLCAST_STOP')
