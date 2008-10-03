@@ -1,6 +1,6 @@
 ## Interface: 20400
 ## Author: p3lim
-## Version: Revision wowi:revision
+## Version: 20400.wowi:revision
 ## Title: oUF BarFader
 ## Notes: Condition fading support for oUF layouts
 ## RequiredDeps: oUF
