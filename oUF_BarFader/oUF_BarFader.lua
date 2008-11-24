@@ -37,7 +37,7 @@ local function UpdateElement(self)
 		elseif(UnitExists(self.unit..'target')) then
 			self:SetAlpha(self.BarFadeMaxAlpha or 1)
 		elseif(self.Castbar) then
-			self:SetAlpha(self.Castbar.casting and (self.BarFadeMaxAlpha or 1) or (self.BarFadeMinAlpha or 0.25))
+			self:SetAlpha((self.Castbar.casting or self.Castbar.channeling) and (self.BarFadeMaxAlpha or 1) or (self.BarFadeMinAlpha or 0.25))
 		elseif(self.unit == 'pet' and GetPetHappiness()) then
 			self:SetAlpha((GetPetHappiness() < 3) and (self.BarFadeMaxAlpha or 1) or (self.BarFadeMinAlpha or 0.25))
 		else
