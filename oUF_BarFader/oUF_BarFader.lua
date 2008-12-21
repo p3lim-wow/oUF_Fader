@@ -21,7 +21,7 @@ end
 
 local function Update(self)
 	if(self.unit == 'player' or self.unit == 'pet' or self.unit == 'focus' or self.unit == 'focustarget' or self.unit == 'targettarget') then
-		if(self.Castbar.casting or self.Castbar.channeling) then
+		if(self.Castbar and (self.Castbar.casting or self.Castbar.channeling)) then
 			self:SetAlpha(self.BarFadeMaxAlpha or 1)
 		elseif(UnitAffectingCombat(self.unit)) then
 			self:SetAlpha(self.BarFadeMaxAlpha or 1)
