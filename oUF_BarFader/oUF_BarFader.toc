@@ -2,7 +2,7 @@
 ## Author: p3lim
 ## Version: 30000.wowi:revision
 ## Title: oUF BarFader
-## Notes: Condition fading support for oUF layouts
+## Notes: Condition fading plug-in for oUF
 ## RequiredDeps: oUF
 
 oUF_BarFader.lua
