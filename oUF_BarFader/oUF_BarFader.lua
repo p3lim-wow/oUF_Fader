@@ -38,7 +38,7 @@ local function Update(self)
 end
 
 local function Enable(self)
-	if(self.BarFade) then
+	if(self.BarFade and self.unit) then
 		Update(self)
 
 		self:RegisterEvent('UNIT_COMBAT', Update)
