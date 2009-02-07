@@ -7,33 +7,31 @@
 
 --]]
 
-local function Regenerating(unit)
-	if(UnitHealth(unit) ~= UnitHealthMax(unit)) then
-		return true
-	else
-		if(UnitPowerType(unit) == 6 or UnitPowerType(unit) == 1) then
-			if(UnitMana(unit) > 0) then return true end
-		else
-			if(UnitMana(unit) ~= UnitManaMax(unit)) then return true end
-		end
+local function Validation(self, unit)
+	if(self.Castbar and (self.Castbar.casting or self.Castbar.channeling)) then
+		return false
+	elseif(UnitAffectingCombat(unit)) then
+		return false
+	elseif(unit == 'pet' and GetPetHappiness() and GetPetHappiness() < 3) then
+		return false
+	elseif(UnitExists(unit..'target')) then	
+		return false
+	elseif(UnitHealth(unit) < UnitHealthMax(unit)) then
+		return false
+	elseif((UnitPowerType(unit) == 6 or UnitPowerType(unit) == 1) and UnitMana(unit) > 0) then
+		return false
+	elseif(UnitMana(unit) < UnitManaMax(unit)) then
+		return false
 	end
+
+	return true
 end
 
 local function Update(self)
-	local unit = self.unit
-	
-	if(self.Castbar and (self.Castbar.casting or self.Castbar.channeling)) then
-		self:SetAlpha(self.BarFadeMaxAlpha or 1)
-	elseif(UnitAffectingCombat(unit)) then
-		self:SetAlpha(self.BarFadeMaxAlpha or 1)
-	elseif(unit == 'pet' and GetPetHappiness()) then
-		self:SetAlpha((GetPetHappiness() < 3) and (self.BarFadeMaxAlpha or 1) or (self.BarFadeMinAlpha or 0.25))
-	elseif(UnitExists(unit..'target')) then
-		self:SetAlpha(self.BarFadeMaxAlpha or 1)
-	elseif(Regenerating(unit)) then
-		self:SetAlpha(self.BarFadeMaxAlpha or 1)
-	else
+	if(Validation(self, self.unit)) then
 		self:SetAlpha(self.BarFadeMinAlpha or 0.25)
+	else
+		self:SetAlpha(self.BarFadeMaxAlpha or 1)
 	end
 end
 
