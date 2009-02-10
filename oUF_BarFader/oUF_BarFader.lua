@@ -8,6 +8,7 @@
 --]]
 
 local function Validation(self, unit)
+	local num, str = UnitPowerType(unit)
 	if(self.Castbar and (self.Castbar.casting or self.Castbar.channeling)) then
 		return false
 	elseif(UnitAffectingCombat(unit)) then
@@ -18,9 +19,9 @@ local function Validation(self, unit)
 		return false
 	elseif(UnitHealth(unit) < UnitHealthMax(unit)) then
 		return false
-	elseif((UnitPowerType(unit) == 6 or UnitPowerType(unit) == 1) and UnitMana(unit) > 0) then
+	elseif((str == 'RAGE' or str == 'RUNIC_POWER') and UnitPower(unit) > 0) then
 		return false
-	elseif(UnitMana(unit) < UnitManaMax(unit)) then
+	elseif((str ~= 'RAGE' and str ~= 'RUNIC_POWER') and UnitMana(unit) < UnitManaMax(unit)) then
 		return false
 	end
 
