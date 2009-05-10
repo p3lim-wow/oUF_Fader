@@ -7,37 +7,29 @@
 
 --]]
 
-local function Validation(self, unit)
+local function pending(self, unit)
 	local num, str = UnitPowerType(unit)
-	if(self.Castbar and (self.Castbar.casting or self.Castbar.channeling)) then
-		return false
-	elseif(UnitAffectingCombat(unit)) then
-		return false
-	elseif(unit == 'pet' and GetPetHappiness() and GetPetHappiness() < 3) then
-		return false
-	elseif(UnitExists(unit..'target')) then	
-		return false
-	elseif(UnitHealth(unit) < UnitHealthMax(unit)) then
-		return false
-	elseif((str == 'RAGE' or str == 'RUNIC_POWER') and UnitPower(unit) > 0) then
-		return false
-	elseif((str ~= 'RAGE' and str ~= 'RUNIC_POWER') and UnitMana(unit) < UnitManaMax(unit)) then
-		return false
-	end
-
-	return true
+	if(self.Castbar and (self.Castbar.casting or self.Castbar.channeling)) then return true end
+	if(UnitAffectingCombat(unit)) then return true end
+	if(unit == 'pet' and GetPetHappiness() and GetPetHappiness() < 3) then return true end
+	if(UnitExists(unit..'target')) then	return true end
+	if(UnitHealth(unit) < UnitHealthMax(unit)) then return true end
+	if((str == 'RAGE' or str == 'RUNIC_POWER') and UnitPower(unit) > 0) then return true end
+	if((str ~= 'RAGE' and str ~= 'RUNIC_POWER') and UnitMana(unit) < UnitManaMax(unit)) then return true end
 end
 
-local function Update(self)
-	if(Validation(self, self.unit)) then
-		self:SetAlpha(self.BarFadeMinAlpha or 0.25)
+local function Update(self, event, unit)
+	if(unit and unit ~= self.unit) then return end
+
+	if(not pending(self, self.unit)) then
+		self:SetAlpha(self.BarFaderMinAlpha or 0.25)
 	else
-		self:SetAlpha(self.BarFadeMaxAlpha or 1)
+		self:SetAlpha(self.BarFaderMaxAlpha or 1)
 	end
 end
 
-local function Enable(self)
-	if(self.BarFade and self.unit) then
+local function Enable(self, unit)
+	if(unit and self.BarFade) then
 		Update(self)
 
 		self:RegisterEvent('UNIT_COMBAT', Update)
