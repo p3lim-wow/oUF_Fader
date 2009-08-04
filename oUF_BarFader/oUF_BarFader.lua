@@ -30,28 +30,29 @@ end
 
 local function enable(self, unit)
 	if(unit and self.BarFade) then
-		Update(self)
+		update(self)
 
-		self:RegisterEvent('UNIT_COMBAT', Update)
-		self:RegisterEvent('UNIT_HAPPINESS', Update)
-		self:RegisterEvent('UNIT_TARGET', Update)
-		self:RegisterEvent('UNIT_FOCUS', Update)
-		self:RegisterEvent('UNIT_HEALTH', Update)
-		self:RegisterEvent('UNIT_POWER', Update)
-		self:RegisterEvent('UNIT_ENERGY', Update)
-		self:RegisterEvent('UNIT_RAGE', Update)
-		self:RegisterEvent('UNIT_MANA', Update)
-		self:RegisterEvent('UNIT_RUNIC_POWER', Update)
+		self:RegisterEvent('UNIT_COMBAT', update)
+		self:RegisterEvent('UNIT_HAPPINESS', update)
+		self:RegisterEvent('UNIT_TARGET', update)
+		self:RegisterEvent('UNIT_FOCUS', update)
+		self:RegisterEvent('UNIT_HEALTH', update)
+		self:RegisterEvent('UNIT_POWER', update)
+		self:RegisterEvent('UNIT_ENERGY', update)
+		self:RegisterEvent('UNIT_RAGE', update)
+		self:RegisterEvent('UNIT_MANA', update)
+		self:RegisterEvent('UNIT_RUNIC_POWER', update)
 
 		if(self.Castbar) then
-			self.PostCastStart = Update
-			self.PostCastFailed = Update
-			self.PostCastInterrupted = Update
-			self.PostCastDelayed = Update
-			self.PostCastStop = Update
-			self.PostChannelStart = Update
-			self.PostChannelUpdate = Update
-			self.PostChannelStop = Update
+			self:RegisterEvent('UNIT_SPELLCAST_START', update)
+			self:RegisterEvent('UNIT_SPELLCAST_FAILED', update)
+			self:RegisterEvent('UNIT_SPELLCAST_STOP', update)
+			self:RegisterEvent('UNIT_SPELLCAST_INTERRUPTED', update)
+			self:RegisterEvent('UNIT_SPELLCAST_DELAYED', update)
+			self:RegisterEvent('UNIT_SPELLCAST_CHANNEL_START', update)
+			self:RegisterEvent('UNIT_SPELLCAST_CHANNEL_UPDATE', update)
+			self:RegisterEvent('UNIT_SPELLCAST_CHANNEL_INTERRUPTED', update)
+			self:RegisterEvent('UNIT_SPELLCAST_CHANNEL_STOP', update)
 		end
 
 		return true
@@ -60,26 +61,27 @@ end
 
 local function disable(self)
 	if(self.BarFade) then
-		self:UnregisterEvent('UNIT_COMBAT', Update)
-		self:UnregisterEvent('UNIT_HAPPINESS', Update)
-		self:UnregisterEvent('UNIT_TARGET', Update)
-		self:UnregisterEvent('UNIT_FOCUS', Update)
-		self:UnregisterEvent('UNIT_HEALTH', Update)
-		self:UnregisterEvent('UNIT_POWER', Update)
-		self:UnregisterEvent('UNIT_ENERGY', Update)
-		self:UnregisterEvent('UNIT_RAGE', Update)
-		self:UnregisterEvent('UNIT_MANA', Update)
-		self:UnregisterEvent('UNIT_RUNIC_POWER', Update)
+		self:UnregisterEvent('UNIT_COMBAT', update)
+		self:UnregisterEvent('UNIT_HAPPINESS', update)
+		self:UnregisterEvent('UNIT_TARGET', update)
+		self:UnregisterEvent('UNIT_FOCUS', update)
+		self:UnregisterEvent('UNIT_HEALTH', update)
+		self:UnregisterEvent('UNIT_POWER', update)
+		self:UnregisterEvent('UNIT_ENERGY', update)
+		self:UnregisterEvent('UNIT_RAGE', update)
+		self:UnregisterEvent('UNIT_MANA', update)
+		self:UnregisterEvent('UNIT_RUNIC_POWER', update)
 
 		if(self.Castbar) then
-			self.PostCastStart = nil
-			self.PostCastFailed = nil
-			self.PostCastInterrupted = nil
-			self.PostCastDelayed = nil
-			self.PostCastStop = nil
-			self.PostChannelStart = nil
-			self.PostChannelUpdate = nil
-			self.PostChannelStop = nil
+			self:UnregisterEvent('UNIT_SPELLCAST_START', update)
+			self:UnregisterEvent('UNIT_SPELLCAST_FAILED', update)
+			self:UnregisterEvent('UNIT_SPELLCAST_STOP', update)
+			self:UnregisterEvent('UNIT_SPELLCAST_INTERRUPTED', update)
+			self:UnregisterEvent('UNIT_SPELLCAST_DELAYED', update)
+			self:UnregisterEvent('UNIT_SPELLCAST_CHANNEL_START', update)
+			self:UnregisterEvent('UNIT_SPELLCAST_CHANNEL_UPDATE', update)
+			self:UnregisterEvent('UNIT_SPELLCAST_CHANNEL_INTERRUPTED', update)
+			self:UnregisterEvent('UNIT_SPELLCAST_CHANNEL_STOP', update)
 		end
 	end
 end
