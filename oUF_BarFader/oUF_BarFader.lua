@@ -18,7 +18,7 @@ local function pending(self, unit)
 	if((str ~= 'RAGE' and str ~= 'RUNIC_POWER') and UnitMana(unit) < UnitManaMax(unit)) then return true end
 end
 
-local function Update(self, event, unit)
+local function update(self, event, unit)
 	if(unit and unit ~= self.unit) then return end
 
 	if(not pending(self, self.unit)) then
@@ -28,7 +28,7 @@ local function Update(self, event, unit)
 	end
 end
 
-local function Enable(self, unit)
+local function enable(self, unit)
 	if(unit and self.BarFade) then
 		Update(self)
 
@@ -58,7 +58,7 @@ local function Enable(self, unit)
 	end
 end
 
-local function Disable(self)
+local function disable(self)
 	if(self.BarFade) then
 		self:UnregisterEvent('UNIT_COMBAT', Update)
 		self:UnregisterEvent('UNIT_HAPPINESS', Update)
@@ -84,4 +84,4 @@ local function Disable(self)
 	end
 end
 
-oUF:AddElement('BarFader', Update, Enable, Disable)
+oUF:AddElement('BarFader', update, enable, disable)
