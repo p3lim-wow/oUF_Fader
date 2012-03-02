@@ -1,6 +1,6 @@
 ## Interface: 30200
 ## Author: p3lim
-## Version: Alpha
+## Version: @project-version@
 ## Title: oUF Fader
 ## Notes: Condition fading plug-in for oUF
 ## RequiredDeps: oUF
