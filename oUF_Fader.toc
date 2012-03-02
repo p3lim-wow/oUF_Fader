@@ -1,4 +1,4 @@
-## Interface: 30200
+## Interface: 40300
 ## Author: p3lim
 ## Version: @project-version@
 ## Title: oUF Fader
