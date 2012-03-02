@@ -2,7 +2,7 @@
 ## Author: p3lim
 ## Version: @project-version@
 ## Title: oUF Fader
-## Notes: Condition fading plug-in for oUF
+## Notes: Conditional fading plug-in for oUF
 ## RequiredDeps: oUF
 
 oUF_Fader.lua
