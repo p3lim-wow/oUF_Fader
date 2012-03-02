@@ -1,8 +1,0 @@
-## Interface: 30200
-## Author: p3lim
-## Version: Alpha
-## Title: oUF BarFader
-## Notes: Condition fading plug-in for oUF
-## RequiredDeps: oUF
-
-oUF_BarFader.lua
